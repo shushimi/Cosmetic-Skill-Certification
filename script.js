@@ -14,20 +14,18 @@ const CATEGORIES = [
     { id: 'p5_05', name: 'Part5: 官能評価', file: 'p5_05.json' }
 ];
 
-let quizData = [];
 let currentQuiz = [];
 let currentIndex = 0;
 let score = 0;
 
-// 起動時
 window.onload = () => {
     renderTopPage();
     updateReviewCount();
 };
 
-// TOPページのカテゴリボタン生成
 function renderTopPage() {
     const list = document.getElementById('category-list');
+    list.innerHTML = '';
     CATEGORIES.forEach(cat => {
         const btn = document.createElement('button');
         btn.className = 'cat-btn';
@@ -37,22 +35,21 @@ function renderTopPage() {
     });
 }
 
-// クイズ開始
+// クイズ開始（カテゴリ内全問出題）
 async function startQuiz(fileName) {
     const response = await fetch(`data/${fileName}`);
     const data = await response.json();
-    currentQuiz = data.sort(() => 0.5 - Math.random()).slice(0, 10); // 各カテゴリ10問ランダム
+    // シャッフルはするが、sliceせず全問をセット
+    currentQuiz = data.sort(() => 0.5 - Math.random());
     initQuiz();
 }
 
 // 復習モード開始
 function startReviewQuiz() {
-    const reviewIDs = JSON.parse(localStorage.getItem('reviewIDs') || '[]');
-    if (reviewIDs.length === 0) return alert('復習する問題がありません');
-    
-    // 全データからIDが一致するものを抽出（本来は全ファイルをfetchする必要あり）
-    // ここでは簡略化のため、一度読み込んだことがある問題のみを対象にするロジックに拡張可能です
-    alert('全カテゴリから復習問題を読み込みます（実装例）');
+    const reviews = JSON.parse(localStorage.getItem('reviewQuestions') || '[]');
+    if (reviews.length === 0) return alert('復習する問題がありません');
+    currentQuiz = reviews.sort(() => 0.5 - Math.random());
+    initQuiz();
 }
 
 function initQuiz() {
@@ -67,18 +64,19 @@ function initQuiz() {
 function showQuestion() {
     const q = currentQuiz[currentIndex];
     document.getElementById('feedback-area').classList.add('hidden');
-    document.getElementById('current-num').innerText = currentIndex + 1;
+    
+    // 表示の修正: 「第〇問」は元のIDを表示。進行状況をカッコ内に表示。
+    document.getElementById('current-num').innerText = `${q.id} (進捗: ${currentIndex + 1}/${currentQuiz.length})`;
+    
     document.getElementById('category-display').innerText = q.category;
     document.getElementById('question-text').innerText = q.question;
     
-    // 表と画像の表示
     const tableArea = document.getElementById('table-area');
     tableArea.innerHTML = q.table ? renderTable(q.table) : '';
     
     const imgArea = document.getElementById('image-area');
     imgArea.innerHTML = q.image ? `<img src="assets/${q.image}">` : '';
 
-    // 選択肢
     const container = document.getElementById('options-container');
     container.innerHTML = '';
     q.options.forEach((opt, i) => {
@@ -113,7 +111,7 @@ function checkAnswer(selected, correct, explanation, questionObj) {
         btns[correct - 1].classList.add('correct');
         document.getElementById('result-mark').innerText = '❌ 不正解';
         document.getElementById('result-mark').style.color = 'var(--wrong-color)';
-        saveReview(questionObj); // 間違えた問題を保存
+        saveReview(questionObj);
     }
 
     document.getElementById('explanation-text').innerText = explanation;
@@ -141,7 +139,6 @@ function quitQuiz() {
     }
 }
 
-// 復習機能：LocalStorage保存
 function saveReview(question) {
     let reviews = JSON.parse(localStorage.getItem('reviewQuestions') || '[]');
     if (!reviews.find(r => r.id === question.id)) {
@@ -160,5 +157,6 @@ function removeReview(id) {
 
 function updateReviewCount() {
     const reviews = JSON.parse(localStorage.getItem('reviewQuestions') || '[]');
-    document.getElementById('review-count').innerText = reviews.length;
+    const countEl = document.getElementById('review-count');
+    if(countEl) countEl.innerText = reviews.length;
 }
