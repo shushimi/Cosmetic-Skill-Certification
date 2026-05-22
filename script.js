@@ -2,15 +2,15 @@
 const CATEGORIES = [
     { id: 'p1_01', name: 'Part1: 化粧の歴史', file: 'p1_01.json' },
     { id: 'p2_02', name: 'Part2: 化粧品の原料', file: 'p2_02.json' },
-    { id: 'p3_03_01_02', name: 'Part3: スキンケア/男性肌', file: 'p3_03_01_02.json' },
-    { id: 'p3_03_03_05', name: 'Part3: UV/メイク/ベース', file: 'p3_03_03_05.json' },
-    { id: 'p3_03_06_08', name: 'Part3: ポイント/特徴/ボディ', file: 'p3_03_06_08.json' },
-    { id: 'p3_03_09_10', name: 'Part3: その他ボディ/毛髪構造', file: 'p3_03_09_10.json' },
-    { id: 'p3_03_11_13', name: 'Part3: ヘアケア/爪/ネイル', file: 'p3_03_11_13.json' },
-    { id: 'p3_03_14_15', name: 'Part3: 嗅覚/フレグランス', file: 'p3_03_14_15.json' },
-    { id: 'p3_03_16_18', name: 'Part3: 歯/ケア/サプリ', file: 'p3_03_16_18.json' },
-    { id: 'p4_04_01_04', name: 'Part4: 薬機法/定義/広告/表示', file: 'p4_04_01_04.json' },
-    { id: 'p4_04_05_07', name: 'Part4: 品質/安全/法律/トラブル', file: 'p4_04_05_07.json' },
+    { id: 'p3_03_01_02', name: 'Part3 1-2: スキンケア/男性肌', file: 'p3_03_01_02.json' },
+    { id: 'p3_03_03_05', name: 'Part3 3-5: UV/メイク/ベース', file: 'p3_03_03_05.json' },
+    { id: 'p3_03_06_08', name: 'Part3 6-8: ポイント/特徴/ボディ', file: 'p3_03_06_08.json' },
+    { id: 'p3_03_09_10', name: 'Part3 9-10: その他ボディ/毛髪構造', file: 'p3_03_09_10.json' },
+    { id: 'p3_03_11_13', name: 'Part3 11-13: ヘアケア/爪/ネイル', file: 'p3_03_11_13.json' },
+    { id: 'p3_03_14_15', name: 'Part3 14-15: 嗅覚/フレグランス', file: 'p3_03_14_15.json' },
+    { id: 'p3_03_16_18', name: 'Part3 16-18: 歯/ケア/サプリ', file: 'p3_03_16_18.json' },
+    { id: 'p4_04_01_04', name: 'Part4 1-4: 薬機法/定義/広告/表示', file: 'p4_04_01_04.json' },
+    { id: 'p4_04_05_07', name: 'Part4 5-7: 品質/安全/法律/トラブル', file: 'p4_04_05_07.json' },
     { id: 'p5_05', name: 'Part5: 官能評価', file: 'p5_05.json' }
 ];
 
