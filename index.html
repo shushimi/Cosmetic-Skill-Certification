@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>化粧品検定 学習アプリ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <!-- フェーズ①: TOPページ -->
+    <div id="top-screen">
+        <h1 id="app-title">化粧品検定 学習</h1>
+        
+        <div id="review-section">
+            <button id="btn-review" onclick="startReviewQuiz()">
+                ❌ 復習する (<span id="review-count">0</span>問)
+            </button>
+        </div>
+
+        <h2 id="cat-select-title">カテゴリを選択</h2>
+        <div id="category-list">
+            <!-- スクリプトでボタンを生成 -->
+        </div>
+    </div>
+
+    <!-- フェーズ②: 学習画面 -->
+    <div id="quiz-screen" class="hidden">
+        <header id="quiz-header">
+            <button id="btn-back-to-top" onclick="quitQuiz()">◀ 戻る</button>
+            <div id="quiz-progress">第 <span id="current-num">1</span> 問</div>
+        </header>
+
+        <main id="quiz-main">
+            <div id="category-display">カテゴリ名</div>
+            <div id="question-area">
+                <p id="question-text">問題文がここに入ります</p>
+                <div id="table-area"></div>
+                <div id="image-area"></div>
+            </div>
+
+            <div id="options-container">
+                <!-- 4択ボタンがここに入る -->
+            </div>
+
+            <!-- 解答後のフィードバック -->
+            <div id="feedback-area" class="hidden">
+                <div id="result-mark">⭕ 正解</div>
+                <div id="explanation-box">
+                    <p id="explanation-text"></p>
+                </div>
+                <button id="btn-next" onclick="nextQuestion()">次の問題へ</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- 完了画面 -->
+    <div id="result-screen" class="hidden">
+        <h2 id="result-title">完了！</h2>
+        <p id="result-stats">10問中 8問正解</p>
+        <button id="btn-finish" onclick="location.reload()">TOPへ戻る</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
